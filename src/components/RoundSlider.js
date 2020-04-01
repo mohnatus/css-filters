@@ -1,4 +1,4 @@
-import React, { useEffect, createRef } from 'react';
+import React from 'react';
 import CircularSlider from '@fseehawer/react-circular-slider';
 import Input from '@material-ui/core/Input';
 import { useTheme } from '@material-ui/core';

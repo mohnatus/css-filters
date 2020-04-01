@@ -7,7 +7,7 @@ const Images = ({ applied, url }) => {
 
   const filterCSS = applied.filter(({ active }) => active).map(({ name, value }) => {
     const filter = filters[name];
-    return `${filter.name}(${value}${filter.unit})`;
+    return filter.css(value);
   }).join(' ');
 
   return (

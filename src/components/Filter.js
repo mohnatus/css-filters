@@ -80,8 +80,7 @@ function Filter({ filterName, active, value, onChange, onRemove, onActivate, onD
         )}
 
         <Code>
-          filter: {filter.name}({value}
-          {filter.unit});
+          filter: {filter.css(value)};
         </Code>
 
       </CardContent>

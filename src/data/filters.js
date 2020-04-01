@@ -20,6 +20,9 @@ function createFilter(name, params = {}) {
     step: 1,
     shape: 'linear',
     info: info[name],
+    css(value) {
+      return `${this.name}(${value}${this.unit})`
+    },
     ...params
   };
   return filter;
@@ -32,7 +35,7 @@ export const filters = {
   saturate: createFilter('saturate', { max: 500, defaultValue: 100 }),
   brightness: createFilter('brightness', { max: 500, defaultValue: 100 }),
   contrast: createFilter('contrast', { max: 500, defaultValue: 100 }),
-  hueRotate: createFilter('hue-rotate', { max: 720, unit: 'deg', shape: 'circular' }),
+  hueRotate: createFilter('hue-rotate', { max: 360, unit: 'deg', shape: 'circular' }),
   invert: createFilter('invert'),
   opacity: createFilter('opacity', { defaultValue: 100 }),
 };

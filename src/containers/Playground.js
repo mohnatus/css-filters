@@ -10,6 +10,7 @@ import Applied from '../components/Applied';
 import FiltersList from '../components/FiltersList';
 import Actions from '../components/Actions';
 import Hidden from '@material-ui/core/Hidden';
+import Result from '../components/Result';
 import {
   changeFilterValue,
   applyFilter,
@@ -55,6 +56,8 @@ function Playground({ applied, changeFilterValue, applyFilter, removeFilter, act
               onActivate={activateFilter}
               onDeactivate={deactivateFilter}
             />
+
+            <Result applied={applied} />
           </Grid>
 
           <Hidden smDown>
