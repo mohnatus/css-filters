@@ -26,16 +26,18 @@ function RoundSlider({ value, min, max, step, onChange }) {
         dataIndex={value}
         width={160}
         knobPosition='top'
+        knobColor={theme.palette.primary.main}
         hideLabelValue
         min={min}
         max={max}
         onChange={sliderChangeHandler}
         progressColorFrom={theme.palette.primary.light}
         progressColorTo={theme.palette.primary.main}
-        progressSize={6}
+        progressSize={5}
+        trackSize={5}
         trackColor={theme.palette.grey[100]}
       >
-        <CircleIcon color="primary" fontSize="small" />
+        <CircleIcon color="primary" fontSize="inherit" />
       </CircularSlider>
       <Input
         type='number'

@@ -2,6 +2,8 @@ import React from 'react';
 import Slider from '@material-ui/core/Slider';
 import RoundSlider from './RoundSlider';
 
+import { useTheme, styled } from '@material-ui/core';
+
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -9,13 +11,14 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Close';
+import DragHandle from '@material-ui/icons/DragHandle';
 import Code from './Code';
 
 import { filters } from '../data/filters';
 
-import CircularSlider from '@fseehawer/react-circular-slider';
+function Filter({ filterName, active, value, onChange, onRemove, onActivate, onDeactivate,  }) {
+  const theme = useTheme();
 
-function Filter({ filterName, active, value, onChange, onRemove, onActivate, onDeactivate }) {
   const filter = filters[filterName];
 
   function changeHandler(newValue) {
@@ -64,8 +67,19 @@ function Filter({ filterName, active, value, onChange, onRemove, onActivate, onD
     opacity: active ? 1 : 0.5
   }
 
+  const Handle = styled('div')({
+    height: 30,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'grab'
+  })
+
   return (
     <Card>
+      <Handle className="dnd-handle"><DragHandle /></Handle>
       <CardHeader
          style={activeStyle}
         action={RemoveButton}

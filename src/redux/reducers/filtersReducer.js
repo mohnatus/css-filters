@@ -4,6 +4,7 @@ import {
   REMOVE_FILTER,
   DEACTIVATE_FILTER,
   ACTIVATE_FILTER,
+  SORT_FILTERS
 } from '../actions/filtersActions';
 import { filters } from '../../data/filters';
 
@@ -66,6 +67,9 @@ export function filtersReducer(state = initialState, action) {
         }
         return filter;
       });
+
+    case SORT_FILTERS:
+      return action.payload;
 
     default:
       return state;

@@ -3,6 +3,7 @@ export const CHANGE_FILTER_VALUE = 'change.filter.value';
 export const REMOVE_FILTER = 'remove.filter';
 export const DEACTIVATE_FILTER = 'deactivate.filter';
 export const ACTIVATE_FILTER = 'activate.filter';
+export const SORT_FILTERS = 'sort.filters';
 
 export function applyFilter(filterName) {
   return {
@@ -38,5 +39,12 @@ export function activateFilter(filterName) {
   return {
     type: ACTIVATE_FILTER,
     payload: filterName
+  }
+}
+
+export function sortFilters(filters) {
+  return {
+    type: SORT_FILTERS,
+    payload: filters
   }
 }

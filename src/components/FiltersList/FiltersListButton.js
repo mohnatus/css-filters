@@ -43,11 +43,11 @@ function FiltersListButton({ filterName, disabled, onClick, view = 'block' }) {
 
   return (
     <>
-      <ButtonGroup variant='contained' color='primary'>
-        <Button disabled={disabled} onClick={clickHandler}>
+      <ButtonGroup variant='contained'>
+        <Button disabled={disabled}  color='primary' onClick={clickHandler}>
           {name}
         </Button>
-        <Button aria-describedby={id} onClick={showInfo}>
+        <Button aria-describedby={id}  color='secondary' onClick={showInfo}>
           <InfoIcon />
         </Button>
       </ButtonGroup>

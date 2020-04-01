@@ -17,13 +17,16 @@ import {
   removeFilter,
   deactivateFilter,
   activateFilter,
+  sortFilters
 } from '../redux/actions/filtersActions';
 
 const url =
   'https://ovdi.ru/upload/iblock/37d/37d8e94a3b157ad89c3d2909baefadbe.jpg';
 
-function Playground({ applied, changeFilterValue, applyFilter, removeFilter, activateFilter, deactivateFilter }) {
+function Playground({ applied, changeFilterValue, applyFilter, removeFilter, activateFilter, deactivateFilter, sortFilters }) {
   const theme = useTheme();
+
+  console.log(theme)
 
   return (
     <Container maxWidth='lg'>
@@ -55,6 +58,7 @@ function Playground({ applied, changeFilterValue, applyFilter, removeFilter, act
               onRemove={removeFilter}
               onActivate={activateFilter}
               onDeactivate={deactivateFilter}
+              onSort={sortFilters}
             />
 
             <Result applied={applied} />
@@ -98,6 +102,9 @@ const mapDispatchToProps = (dispatch) => {
     activateFilter: (filterName) => {
       dispatch(activateFilter(filterName));
     },
+    sortFilters: (filters) => {
+      dispatch(sortFilters(filters))
+    }
   };
 };
 
