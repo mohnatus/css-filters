@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Close';
+import Code from './Code';
 
 import { filters } from '../data/filters';
 
@@ -17,26 +18,30 @@ import CircularSlider from '@fseehawer/react-circular-slider';
 function Filter({ filterName, value, onChange, onRemove }) {
   const filter = filters[filterName];
 
-  const changeHandler = (newValue) => {
+  function changeHandler(newValue) {
     onChange(filterName, newValue);
   };
 
-  const linearSliderChangeHandler = (event, newValue) => {
+  function linearSliderChangeHandler(event, newValue) {
     changeHandler(newValue);
   }
 
-  const roundSliderChangeHandler = (newValue) => {
+  function roundSliderChangeHandler(newValue) {
     console.log('in filter', newValue)
     changeHandler(newValue);
   }
 
-  const resetHandler = () => {
+  function resetHandler() {
     onChange(filterName, filter.defaultValue);
   };
 
-  const removeHandler = () => {
+  function removeHandler() {
     onRemove(filterName);
   };
+
+  function deactivateHandler() {
+
+  }
 
   const RemoveButton = (
     <IconButton aria-label='remove' onClick={removeHandler} color='primary'>
@@ -65,10 +70,11 @@ function Filter({ filterName, value, onChange, onRemove }) {
           <Slider {...sliderParams} onChange={linearSliderChangeHandler} />
         )}
 
-        <pre>
+        <Code>
           filter: {filter.name}({value}
           {filter.unit});
-        </pre>
+        </Code>
+
       </CardContent>
       <CardActions>
         <Button
@@ -80,9 +86,9 @@ function Filter({ filterName, value, onChange, onRemove }) {
           RESET
         </Button>
 
-        <Button fullWidth>COPY</Button>
+        <Button fullWidth onClick={deactivateHandler}>DEACTIVATE</Button>
       </CardActions>
-      
+
     </Card>
   );
 }
