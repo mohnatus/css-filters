@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Images from '../components/Images';
 import Applied from '../components/Applied';
 import FiltersList from '../components/FiltersList';
+import Actions from '../components/Actions';
 import { changeFilterValue, applyFilter, removeFilter } from '../redux/actions';
 
 const url =
@@ -24,6 +25,8 @@ function Playground({ applied, changeFilterValue, applyFilter, removeFilter }) {
           <Grid item xs={12} sm={10} md={9}>
 
             <Images applied={applied} url={url} />
+
+            <Actions/>
 
             <Applied list={applied} onChange={changeFilterValue} onRemove={removeFilter} />
 

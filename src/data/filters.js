@@ -1,3 +1,14 @@
+const info = {
+  opacity: 'Прозрачность',
+  grayscale: 'Оттенки серого',
+  sepia: 'Сепия',
+  blur: 'Размытие',
+  saturate: 'Насыщенность',
+  brightness: 'Яркость',
+  contrast: 'Контраст',
+  invert: 'Негатив',
+};
+
 function createFilter(name, params = {}) {
   const filter = {
     name,
@@ -7,6 +18,7 @@ function createFilter(name, params = {}) {
     unit: '%',
     step: 1,
     shape: 'linear',
+    info: info[name],
     ...params
   };
   return filter;
