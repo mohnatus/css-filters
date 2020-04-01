@@ -10,13 +10,18 @@ import Applied from '../components/Applied';
 import FiltersList from '../components/FiltersList';
 import Actions from '../components/Actions';
 import Hidden from '@material-ui/core/Hidden';
-import { changeFilterValue, applyFilter, removeFilter } from '../redux/actions';
-
+import {
+  changeFilterValue,
+  applyFilter,
+  removeFilter,
+  deactivateFilter,
+  activateFilter,
+} from '../redux/actions/filtersActions';
 
 const url =
   'https://ovdi.ru/upload/iblock/37d/37d8e94a3b157ad89c3d2909baefadbe.jpg';
 
-function Playground({ applied, changeFilterValue, applyFilter, removeFilter }) {
+function Playground({ applied, changeFilterValue, applyFilter, removeFilter, activateFilter, deactivateFilter }) {
   const theme = useTheme();
 
   return (
@@ -30,7 +35,11 @@ function Playground({ applied, changeFilterValue, applyFilter, removeFilter }) {
         <Grid container spacing={3}>
           <Hidden mdUp>
             <Grid item xs={12}>
-              <FiltersList applied={applied} onApply={applyFilter} view='inline' />
+              <FiltersList
+                applied={applied}
+                onApply={applyFilter}
+                view='inline'
+              />
             </Grid>
           </Hidden>
 
@@ -43,24 +52,29 @@ function Playground({ applied, changeFilterValue, applyFilter, removeFilter }) {
               list={applied}
               onChange={changeFilterValue}
               onRemove={removeFilter}
+              onActivate={activateFilter}
+              onDeactivate={deactivateFilter}
             />
           </Grid>
 
           <Hidden smDown>
             <Grid item md={3}>
-              <FiltersList applied={applied} onApply={applyFilter} view='block' />
+              <FiltersList
+                applied={applied}
+                onApply={applyFilter}
+                view='block'
+              />
             </Grid>
           </Hidden>
         </Grid>
       </div>
-
     </Container>
   );
 }
 
-const mapStateToProps = ({ applied }) => {
+const mapStateToProps = ({ filters }) => {
   return {
-    applied,
+    applied: filters,
   };
 };
 
@@ -74,6 +88,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     removeFilter: (filterName) => {
       dispatch(removeFilter(filterName));
+    },
+    deactivateFilter: (filterName) => {
+      dispatch(deactivateFilter(filterName));
+    },
+    activateFilter: (filterName) => {
+      dispatch(activateFilter(filterName));
     },
   };
 };

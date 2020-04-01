@@ -5,7 +5,7 @@ import {filters} from '../data/filters';
 
 const Images = ({ applied, url }) => {
 
-  const filterCSS = applied.map(({ name, value }) => {
+  const filterCSS = applied.filter(({ active }) => active).map(({ name, value }) => {
     const filter = filters[name];
     return `${filter.name}(${value}${filter.unit})`;
   }).join(' ');

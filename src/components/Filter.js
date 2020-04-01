@@ -15,7 +15,7 @@ import { filters } from '../data/filters';
 
 import CircularSlider from '@fseehawer/react-circular-slider';
 
-function Filter({ filterName, value, onChange, onRemove }) {
+function Filter({ filterName, active, value, onChange, onRemove, onActivate, onDeactivate }) {
   const filter = filters[filterName];
 
   function changeHandler(newValue) {
@@ -40,7 +40,11 @@ function Filter({ filterName, value, onChange, onRemove }) {
   };
 
   function deactivateHandler() {
+    onDeactivate(filterName)
+  }
 
+  function activateHandler() {
+    onActivate(filterName)
   }
 
   const RemoveButton = (
@@ -56,14 +60,19 @@ function Filter({ filterName, value, onChange, onRemove }) {
     step: filter.step,
   };
 
+  const activeStyle = {
+    opacity: active ? 1 : 0.5
+  }
+
   return (
     <Card>
       <CardHeader
+         style={activeStyle}
         action={RemoveButton}
         subheader={filter.name}
         title={`${value}${filter.unit}`}
       />
-      <CardContent>
+      <CardContent  style={activeStyle}>
         {filter.shape === 'circular' ? (
           <RoundSlider {...sliderParams} onChange={roundSliderChangeHandler} />
         ) : (
@@ -86,7 +95,9 @@ function Filter({ filterName, value, onChange, onRemove }) {
           RESET
         </Button>
 
-        <Button fullWidth onClick={deactivateHandler}>DEACTIVATE</Button>
+        {active ? <Button fullWidth onClick={deactivateHandler}>DEACTIVATE</Button> : <Button color="secondary" fullWidth onClick={activateHandler}>ACTIVATE</Button>}
+
+
       </CardActions>
 
     </Card>

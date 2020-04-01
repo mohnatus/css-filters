@@ -1,6 +1,5 @@
 import React, { createRef } from 'react';
 import { useTheme } from '@material-ui/core';
-import grey from '@material-ui/core/colors/grey';
 import Button from '@material-ui/core/Button';
 import copy from 'copy-to-clipboard';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -35,7 +34,7 @@ function Code({ children }) {
   return (
     <div
       style={{
-        background: grey[100],
+        background: theme.palette.grey[100],
         padding: theme.spacing(2),
         position: 'relative',
         marginTop: theme.spacing(2),
