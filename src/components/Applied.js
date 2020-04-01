@@ -12,14 +12,14 @@ const Applied = ({ list, onChange, onRemove }) => {
           <Grid item key={`filter-${name}`} xs={12} sm={6} md={4}>
             <Filter
               value={value}
-              name={name}
+              filterName={name}
               onChange={onChange}
               onRemove={onRemove}
             />
           </Grid>
-
         );
       })}
+      <div></div>
     </Grid>
   );
 };

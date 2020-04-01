@@ -12,6 +12,7 @@ import Actions from '../components/Actions';
 import Hidden from '@material-ui/core/Hidden';
 import { changeFilterValue, applyFilter, removeFilter } from '../redux/actions';
 
+
 const url =
   'https://ovdi.ru/upload/iblock/37d/37d8e94a3b157ad89c3d2909baefadbe.jpg';
 
@@ -52,6 +53,7 @@ function Playground({ applied, changeFilterValue, applyFilter, removeFilter }) {
           </Hidden>
         </Grid>
       </div>
+
     </Container>
   );
 }

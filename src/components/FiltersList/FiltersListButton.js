@@ -7,13 +7,17 @@ import Typography from '@material-ui/core/Typography';
 import Popover from '@material-ui/core/Popover';
 import InfoIcon from '@material-ui/icons/Info';
 
-function FiltersListButton({ name, text, disabled, onClick, view = 'block' }) {
+import { filters } from '../../data/filters';
+
+function FiltersListButton({ filterName, disabled, onClick, view = 'block' }) {
   const theme = useTheme();
+
+  const { name, info } = filters[filterName];
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   function clickHandler() {
-    onClick(name);
+    onClick(filterName);
   }
 
   function showInfo(event) {
@@ -55,7 +59,7 @@ function FiltersListButton({ name, text, disabled, onClick, view = 'block' }) {
         anchorOrigin={anchorOrigin}
         transformOrigin={transformOrigin}
       >
-        <Typography variant="body2" component="div" style={{ padding: theme.spacing(2) }}>{text}</Typography>
+        <Typography variant="body2" component="div" style={{ padding: theme.spacing(2) }}>{info}</Typography>
       </Popover>
     </>
   );

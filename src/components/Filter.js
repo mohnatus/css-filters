@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Slider from '@material-ui/core/Slider';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import RoundSlider from './RoundSlider';
+
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -9,30 +9,33 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Close';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Collapse from '@material-ui/core/Collapse';
+
 import { filters } from '../data/filters';
-import { styled } from '@material-ui/core';
 
-function Filter({ name, value, onChange, onRemove }) {
-  const filter = filters[name];
+import CircularSlider from '@fseehawer/react-circular-slider';
 
-  const [expanded, setExpanded] = React.useState(false);
+function Filter({ filterName, value, onChange, onRemove }) {
+  const filter = filters[filterName];
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const changeHandler = (newValue) => {
+    onChange(filterName, newValue);
   };
 
-  const changeHandler = (_, newValue) => {
-    onChange(filter.name, newValue);
-  };
+  const linearSliderChangeHandler = (event, newValue) => {
+    changeHandler(newValue);
+  }
+
+  const roundSliderChangeHandler = (newValue) => {
+    console.log('in filter', newValue)
+    changeHandler(newValue);
+  }
 
   const resetHandler = () => {
-    onChange(filter.name, filter.defaultValue);
+    onChange(filterName, filter.defaultValue);
   };
 
   const removeHandler = () => {
-    onRemove(filter.name);
+    onRemove(filterName);
   };
 
   const RemoveButton = (
@@ -56,20 +59,18 @@ function Filter({ name, value, onChange, onRemove }) {
         title={`${value}${filter.unit}`}
       />
       <CardContent>
-        <Slider {...sliderParams} onChange={changeHandler} />
+        {filter.shape === 'circular' ? (
+          <RoundSlider {...sliderParams} onChange={roundSliderChangeHandler} />
+        ) : (
+          <Slider {...sliderParams} onChange={linearSliderChangeHandler} />
+        )}
+
         <pre>
           filter: {filter.name}({value}
           {filter.unit});
         </pre>
       </CardContent>
       <CardActions>
-        {/* <IconButton aria-label='copy css code'>
-          <CopyIcon />
-        </IconButton> */}
-        {/* <IconButton aria-label='info'>
-          <InfoIcon />
-        </IconButton> */}
-
         <Button
           color={value === filter.defaultValue ? 'secondary' : 'default'}
           fullWidth
@@ -81,6 +82,7 @@ function Filter({ name, value, onChange, onRemove }) {
 
         <Button fullWidth>COPY</Button>
       </CardActions>
+      
     </Card>
   );
 }

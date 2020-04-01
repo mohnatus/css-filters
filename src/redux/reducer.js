@@ -4,7 +4,7 @@ import { filters } from '../data/filters';
 const initialState = {
   applied: [
     {
-      name: 'opacity',
+      name: 'hueRotate',
       value: 100
     }
   ],
@@ -16,7 +16,6 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case APPLY_FILTER:
       const appliedFilter = filters[action.payload];
-      console.log(appliedFilter)
       if (!appliedFilter) return state;
 
       applied = state.applied.filter((filter) => {

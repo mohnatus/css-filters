@@ -9,17 +9,17 @@ function FiltersList({ applied, onApply, view }) {
 
   const list = Object.keys(filters).map((filterName) => {
     return {
-      name: filters[filterName].name,
+      filterName,
       disabled: !!applied.find((filter) => filter.name === filterName),
     };
   });
 
   return (
     <Grid container spacing={1}>
-      {list.map(({ name, disabled }) => {
+      {list.map(({ filterName, disabled }) => {
         return (
-          <Grid item key={name} xs="auto" md={12}>
-            <FiltersListButton name={name} disabled={disabled} text={filters[name].info} onClick={onApply} view={view} />
+          <Grid item key={filterName} xs="auto" md={12}>
+            <FiltersListButton filterName={filterName} disabled={disabled} onClick={onApply} view={view} />
           </Grid>
         );
       })}
