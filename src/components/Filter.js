@@ -80,20 +80,7 @@ function Filter({ name, value, onChange, onRemove }) {
         </Button>
 
         <Button fullWidth>COPY</Button>
-
-        <Button
-          color={expanded ? 'secondary' : 'default'}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label='show more'
-          fullWidth
-        >
-          INFO
-        </Button>
       </CardActions>
-      <Collapse in={expanded} timeout='auto' unmountOnExit>
-        <CardContent>{filter.info}</CardContent>
-      </Collapse>
     </Card>
   );
 }
