@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+
 import Typography from '@material-ui/core/Typography';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
+import Link from '@material-ui/core/Link';
+
+import { site } from '../data/links';
 
 function HideOnScroll({ children }) {
   const trigger = useScrollTrigger();
@@ -19,34 +19,16 @@ function HideOnScroll({ children }) {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  offset: theme.mixins.toolbar,
-}));
-
 const Header = () => {
-  const classes = useStyles();
-
   return (
     <>
       <HideOnScroll>
         <AppBar position='sticky'>
           <Toolbar>
-            <IconButton
-              edge='start'
-              className={classes.menuButton}
-              color='inherit'
-              aria-label='menu'
-            >
-              <MenuIcon />
-            </IconButton>
-
-            <Typography variant='h6'>CSS Filters</Typography>
+            <Typography variant='h6' style={{ flexGrow: 1 }}>CSS Filters</Typography>
+            <Typography variant='h6'>
+              <Link href={site.url}  color="inherit">{site.name}</Link>
+            </Typography>
           </Toolbar>
         </AppBar>
       </HideOnScroll>

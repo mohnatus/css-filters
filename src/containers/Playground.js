@@ -5,10 +5,10 @@ import { useTheme } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
-import Images from '../components/Images';
+import Image from './Image';
 import Applied from '../components/Applied';
 import FiltersList from '../components/FiltersList';
-import Actions from '../components/Actions';
+
 import Hidden from '@material-ui/core/Hidden';
 import Result from '../components/Result';
 import {
@@ -20,13 +20,8 @@ import {
   sortFilters
 } from '../redux/actions/filtersActions';
 
-const url =
-  'https://ovdi.ru/upload/iblock/37d/37d8e94a3b157ad89c3d2909baefadbe.jpg';
-
 function Playground({ applied, changeFilterValue, applyFilter, removeFilter, activateFilter, deactivateFilter, sortFilters }) {
   const theme = useTheme();
-
-  console.log(theme)
 
   return (
     <Container maxWidth='lg'>
@@ -48,9 +43,7 @@ function Playground({ applied, changeFilterValue, applyFilter, removeFilter, act
           </Hidden>
 
           <Grid item xs={12} md={9}>
-            <Images applied={applied} url={url} />
-
-            <Actions />
+            <Image applied={applied} />
 
             <Applied
               list={applied}
