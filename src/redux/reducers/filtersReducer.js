@@ -8,7 +8,13 @@ import {
 } from '../actions/filtersActions';
 import { filters } from '../../data/filters';
 
-const initialState = [];
+const initialState = [
+  {
+    name: 'invert',
+    value: 100,
+    active: true
+  }
+];
 
 export function filtersReducer(state = initialState, action) {
   let applied;

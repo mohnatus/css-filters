@@ -1,4 +1,4 @@
-import startImage from '../../images/1.jpg';
+import startImage from '../../images/3.jpg';
 import { CHANGE_IMAGE, LOAD_IMAGE } from '../actions/imageActions';
 
 const initialState = {
