@@ -8,43 +8,44 @@ export const SORT_FILTERS = 'sort.filters';
 export function applyFilter(filterName) {
   return {
     type: APPLY_FILTER,
-    payload: filterName
-  }
+    payload: filterName,
+  };
 }
 
 export function changeFilterValue(filterName, newValue) {
   return {
     type: CHANGE_FILTER_VALUE,
     payload: {
-      filterName, newValue
-    }
-  }
+      filterName,
+      newValue,
+    },
+  };
 }
 
 export function removeFilter(filterName) {
   return {
     type: REMOVE_FILTER,
-    payload: filterName
-  }
+    payload: filterName,
+  };
 }
 
 export function deactivateFilter(filterName) {
   return {
     type: DEACTIVATE_FILTER,
-    payload: filterName
-  }
+    payload: filterName,
+  };
 }
 
 export function activateFilter(filterName) {
   return {
     type: ACTIVATE_FILTER,
-    payload: filterName
-  }
+    payload: filterName,
+  };
 }
 
 export function sortFilters(filters) {
   return {
     type: SORT_FILTERS,
-    payload: filters
-  }
+    payload: filters,
+  };
 }

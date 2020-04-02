@@ -8,9 +8,11 @@ function Preview({ url, size, selected, onClick }) {
     onClick(url);
   }
   return (
-    <div onClick={clickHandler}>
-      <img src={url} alt="" height={size} />
-      { selected ? <div style={{ height: 3, background: theme.palette.primary.main }}/> : null}
+    <div onClick={clickHandler} style={{cursor: 'pointer'}}>
+      <img src={url} alt='' height={size} />
+      {selected ? (
+        <div style={{ height: 3, background: theme.palette.primary.main }} />
+      ) : null}
     </div>
   );
 }

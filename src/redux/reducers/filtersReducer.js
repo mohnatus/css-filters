@@ -4,7 +4,7 @@ import {
   REMOVE_FILTER,
   DEACTIVATE_FILTER,
   ACTIVATE_FILTER,
-  SORT_FILTERS
+  SORT_FILTERS,
 } from '../actions/filtersActions';
 import { filters } from '../../data/filters';
 
@@ -24,7 +24,7 @@ export function filtersReducer(state = initialState, action) {
       applied.push({
         name: action.payload,
         value: appliedFilter.defaultValue,
-        active: true
+        active: true,
       });
 
       return applied;

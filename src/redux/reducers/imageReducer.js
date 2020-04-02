@@ -17,7 +17,7 @@ export function imageReducer(state = initialState, action) {
       return {
         ...state,
         custom: action.payload,
-        current: action.payload
+        current: action.payload,
       };
     default:
       return state;

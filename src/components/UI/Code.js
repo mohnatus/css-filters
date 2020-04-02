@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import copy from 'copy-to-clipboard';
 import Snackbar from '@material-ui/core/Snackbar';
 
-
 function Code({ children }) {
   const [feedback, setFeedback] = React.useState(null);
 
@@ -17,13 +16,13 @@ function Code({ children }) {
     if (result) {
       setFeedback({
         text: 'COPIED',
-        error: false
+        error: false,
       });
     } else {
       setFeedback({
         text: 'ERROR',
-        error: true
-      })
+        error: true,
+      });
     }
   }
 
@@ -55,14 +54,14 @@ function Code({ children }) {
         Copy
       </Button>
 
-      { feedback ? (<Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open
-        onClose={hideFeedback}
-        message={feedback.text}
-      />) : null }
-
-
+      {feedback ? (
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open
+          onClose={hideFeedback}
+          message={feedback.text}
+        />
+      ) : null}
     </div>
   );
 }

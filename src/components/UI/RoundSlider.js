@@ -6,9 +6,7 @@ import CircleIcon from '@material-ui/icons/FiberManualRecord';
 
 function RoundSlider({ value, min, max, step, onChange }) {
   const theme = useTheme();
-  console.log(theme)
   function changeHandler(newValue) {
-    console.log('change', newValue);
     if (newValue === value) return;
     onChange(newValue);
   }
@@ -37,7 +35,7 @@ function RoundSlider({ value, min, max, step, onChange }) {
         trackSize={5}
         trackColor={theme.palette.grey[100]}
       >
-        <CircleIcon color="primary" fontSize="inherit" />
+        <CircleIcon color='primary' fontSize='inherit' />
       </CircularSlider>
       <Input
         type='number'
@@ -55,7 +53,7 @@ function RoundSlider({ value, min, max, step, onChange }) {
           style: { textAlign: 'center' },
           min,
           max,
-          step
+          step,
         }}
         onChange={inputChangeHandler}
       />

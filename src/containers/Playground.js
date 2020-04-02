@@ -6,21 +6,29 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
 import Image from './Image';
-import Applied from '../components/Applied';
+import Applied from '../components/Applied/Applied';
 import FiltersList from '../components/FiltersList';
 
 import Hidden from '@material-ui/core/Hidden';
-import Result from '../components/Result';
+import ResultCode from '../components/ResultCode';
 import {
   changeFilterValue,
   applyFilter,
   removeFilter,
   deactivateFilter,
   activateFilter,
-  sortFilters
+  sortFilters,
 } from '../redux/actions/filtersActions';
 
-function Playground({ applied, changeFilterValue, applyFilter, removeFilter, activateFilter, deactivateFilter, sortFilters }) {
+function Playground({
+  applied,
+  changeFilterValue,
+  applyFilter,
+  removeFilter,
+  activateFilter,
+  deactivateFilter,
+  sortFilters,
+}) {
   const theme = useTheme();
 
   return (
@@ -54,7 +62,7 @@ function Playground({ applied, changeFilterValue, applyFilter, removeFilter, act
               onSort={sortFilters}
             />
 
-            <Result applied={applied} />
+            <ResultCode applied={applied} />
           </Grid>
 
           <Hidden smDown>
@@ -96,8 +104,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(activateFilter(filterName));
     },
     sortFilters: (filters) => {
-      dispatch(sortFilters(filters))
-    }
+      dispatch(sortFilters(filters));
+    },
   };
 };
 

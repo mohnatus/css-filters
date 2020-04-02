@@ -14,12 +14,8 @@ const theme = createMuiTheme({
   palette: {
     primary: purple,
     secondary: green,
-  }
+  },
 });
-
-
-
-console.log(theme)
 
 function App() {
   return (
