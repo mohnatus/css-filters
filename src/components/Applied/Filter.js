@@ -1,9 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
-import RoundSlider from '../UI/RoundSlider';
-
-import { useTheme, styled } from '@material-ui/core';
-
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -13,8 +11,34 @@ import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Close';
 import DragHandle from '@material-ui/icons/DragHandle';
 import Code from '../UI/Code';
-
+import RoundSlider from '../UI/RoundSlider';
 import { filters } from '../../data/filters';
+
+const useStyles = makeStyles(({ palette }) => ({
+  handle: {
+    height: 30,
+    backgroundColor: palette.primary.main,
+    color: palette.primary.contrastText,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'grab',
+    '&:hover': {
+      backgroundColor: palette.primary.dark
+    }
+  },
+}));
+
+Filter.propTypes = {
+  filterName: PropTypes.string.isRequired,
+  active: PropTypes.bool.isRequired,
+  value: PropTypes.number.isRequired,
+
+  onChange: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  onActivate: PropTypes.func.isRequired,
+  onDeactivate: PropTypes.func.isRequired,
+};
 
 function Filter({
   filterName,
@@ -25,30 +49,28 @@ function Filter({
   onActivate,
   onDeactivate,
 }) {
-  const theme = useTheme();
+  const classes = useStyles();
+  const activeStyle = {
+    opacity: active ? 1 : 0.5,
+  };
 
   const filter = filters[filterName];
 
   function changeHandler(newValue) {
     onChange(filterName, newValue);
   }
-
   function linearSliderChangeHandler(event, newValue) {
     changeHandler(newValue);
   }
-
   function resetHandler() {
     onChange(filterName, filter.defaultValue);
   }
-
   function removeHandler() {
     onRemove(filterName);
   }
-
   function deactivateHandler() {
     onDeactivate(filterName);
   }
-
   function activateHandler() {
     onActivate(filterName);
   }
@@ -66,25 +88,11 @@ function Filter({
     step: filter.step,
   };
 
-  const activeStyle = {
-    opacity: active ? 1 : 0.5,
-  };
-
-  const Handle = styled('div')({
-    height: 30,
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'grab',
-  });
-
   return (
     <Card>
-      <Handle className='dnd-handle'>
+      <div className={`${classes.handle} dnd-handle`}>
         <DragHandle />
-      </Handle>
+      </div>
       <CardHeader
         style={activeStyle}
         action={RemoveButton}

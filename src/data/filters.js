@@ -1,30 +1,30 @@
 const info = {
   opacity: {
-    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/opacity'
+    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/opacity'
   },
   grayscale: {
-    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/grayscale'
+    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/grayscale'
   },
   sepia: {
-    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/sepia'
+    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/sepia'
   },
   blur: {
-    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur'
+    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur'
   },
   saturate: {
-    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/saturate'
+    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/saturate'
   },
   brightness: {
-    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness'
+    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness'
   },
   contrast: {
-    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/contrast'
+    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/contrast'
   },
   invert: {
-    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert'
+    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert'
   },
   'hue-rotate': {
-    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/hue-rotate'
+    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/hue-rotate'
   },
 };
 

@@ -11,6 +11,6 @@ export const menu = [
     url: 'https://www.cat-in-web.ru/8-css-filters/',
     subtitle: '8 CSS фильтров для изображений',
     title: 'READ',
-    icon: <BooksIcon color='primary' />,
+    icon: <BooksIcon color='inherit' />,
   },
 ];

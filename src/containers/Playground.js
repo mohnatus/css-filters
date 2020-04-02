@@ -1,15 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import { useTheme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-
+import Hidden from '@material-ui/core/Hidden';
 import Image from './Image';
 import Applied from '../components/Applied/Applied';
 import FiltersList from '../components/FiltersList';
-
-import Hidden from '@material-ui/core/Hidden';
 import ResultCode from '../components/ResultCode';
 import {
   changeFilterValue,
@@ -19,6 +16,14 @@ import {
   activateFilter,
   sortFilters,
 } from '../redux/actions/filtersActions';
+import Google from '../components/Google';
+
+const useStyles = makeStyles(({ spacing }) => ({
+  root: {
+    paddingTop: spacing(3),
+    paddingBottom: spacing(3),
+  },
+}));
 
 function Playground({
   applied,
@@ -29,16 +34,11 @@ function Playground({
   deactivateFilter,
   sortFilters,
 }) {
-  const theme = useTheme();
+  const classes = useStyles();
 
   return (
     <Container maxWidth='lg'>
-      <div
-        style={{
-          paddingTop: theme.spacing(3),
-          paddingBottom: theme.spacing(3),
-        }}
-      >
+      <div className={classes.root}>
         <Grid container spacing={3}>
           <Hidden mdUp>
             <Grid item xs={12}>
@@ -73,6 +73,7 @@ function Playground({
                 view='block'
               />
             </Grid>
+            <Google />
           </Hidden>
         </Grid>
       </div>

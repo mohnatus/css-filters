@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import list from './list';
 import Preview from './Preview';
 import UploadButton from '../UI/UploadButton';
+import list from './list';
 import { getDataUrl } from '../../utils/file';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+Select.propTypes = {
+  current: PropTypes.string.isRequired,
+  cusrom: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onLoad: PropTypes.func.isRequired,
+};
 
 function Select({ current, custom, onChange, onLoad }) {
   const [open, setOpen] = useState(false);
@@ -61,7 +70,11 @@ function Select({ current, custom, onChange, onLoad }) {
               </Grid>
             ) : null}
             <Grid item xs='auto'>
-              {loading ? 'Loading' : <UploadButton onLoad={loadHandler} />}
+              {loading ? (
+                <CircularProgress />
+              ) : (
+                <UploadButton onLoad={loadHandler} />
+              )}
             </Grid>
           </Grid>
         </Grid>

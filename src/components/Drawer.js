@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
-
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
 import { menu } from '../data/links';
 
-function Drawer(props) {
+const useStyles = makeStyles(({ palette }) => ({
+  list: {
+    width: 250,
+  },
+  item: {
+    color: palette.text.primary,
+    '&:hover': {
+      color: palette.primary.main,
+    },
+  },
+  icon: {
+    color: 'inherit',
+  },
+}));
+
+function Drawer() {
+  const classes = useStyles();
   const [state, setState] = useState(false);
 
   const toggleDrawer = (open) => (event) => {
@@ -46,12 +61,17 @@ function Drawer(props) {
           onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
         >
-          <List style={{ width: 250 }}>
+          <List className={classes.list}>
             {menu.map((item, index) => {
               const { url, title, subtitle, icon } = item;
               return (
-                <ListItem key={index} component={'a'} href={url}>
-                  <ListItemIcon>{icon}</ListItemIcon>
+                <ListItem
+                  key={index}
+                  component={'a'}
+                  href={url}
+                  className={classes.item}
+                >
+                  <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
                   <ListItemText primary={title} secondary={subtitle} />
                 </ListItem>
               );

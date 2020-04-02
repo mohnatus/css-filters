@@ -1,10 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-
 import Filter from './Filter';
 import { ReactSortable } from 'react-sortablejs';
 
-const Applied = ({ list, onSort, ...callbacks }) => {
+Applied.propTypes = {
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.number,
+      active: PropTypes.bool,
+    }),
+  ).isRequired,
+  onSort: PropTypes.func.isRequired,
+};
+
+function Applied({ list, onSort, ...callbacks }) {
   return (
     <ReactSortable
       list={list}
@@ -30,6 +41,6 @@ const Applied = ({ list, onSort, ...callbacks }) => {
       })}
     </ReactSortable>
   );
-};
+}
 
 export default Applied;

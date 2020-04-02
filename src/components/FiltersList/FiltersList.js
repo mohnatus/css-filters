@@ -1,12 +1,19 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import FiltersListButton from './FiltersListButton';
-
 import { filters } from '../../data/filters';
-import { Grid } from '@material-ui/core';
 
-function FiltersList({ applied, onApply, view }) {
+FiltersList.propTypes = {
+  applied: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+    }),
+  ).isRequired,
+  onApply: PropTypes.func.isRequired,
+};
 
+function FiltersList({ applied, onApply }) {
   const list = Object.keys(filters).map((filterName) => {
     return {
       filterName,
@@ -18,8 +25,12 @@ function FiltersList({ applied, onApply, view }) {
     <Grid container spacing={1}>
       {list.map(({ filterName, disabled }) => {
         return (
-          <Grid item key={filterName} xs="auto" md={12}>
-            <FiltersListButton filterName={filterName} disabled={disabled} onClick={onApply} view={view} />
+          <Grid item key={filterName} xs='auto' md={12}>
+            <FiltersListButton
+              filterName={filterName}
+              disabled={disabled}
+              onClick={onApply}
+            />
           </Grid>
         );
       })}

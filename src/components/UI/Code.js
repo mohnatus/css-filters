@@ -1,13 +1,31 @@
 import React, { createRef } from 'react';
-import { useTheme } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import copy from 'copy-to-clipboard';
 import Snackbar from '@material-ui/core/Snackbar';
+import copy from 'copy-to-clipboard';
+
+const useStyles = makeStyles(({ palette, spacing }) => ({
+  root: {
+    background: palette.grey[100],
+    padding: spacing(2),
+    position: 'relative',
+    marginTop: spacing(2),
+  },
+  button: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  },
+}));
+
+Code.propTypes = {
+  children: PropTypes.node,
+};
 
 function Code({ children }) {
+  const classes = useStyles();
   const [feedback, setFeedback] = React.useState(null);
-
-  const theme = useTheme();
   const codeRef = createRef();
 
   function copyHandler() {
@@ -31,23 +49,12 @@ function Code({ children }) {
   }
 
   return (
-    <div
-      style={{
-        background: theme.palette.grey[100],
-        padding: theme.spacing(2),
-        position: 'relative',
-        marginTop: theme.spacing(2),
-      }}
-    >
+    <div className={classes.root} >
       <pre ref={codeRef}>{children}</pre>
 
       <Button
         onClick={copyHandler}
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-        }}
+        className={classes.button}
         color='primary'
         size='small'
       >

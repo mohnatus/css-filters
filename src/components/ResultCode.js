@@ -1,6 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Code from './UI/Code';
 import { filters } from '../data/filters';
+
+ResultCode.propTypes = {
+  applied: PropTypes.arrayOf(
+    PropTypes.shape({
+      active: PropTypes.bool,
+      name: PropTypes.string,
+      value: PropTypes.number,
+    }),
+  ),
+};
 
 function ResultCode({ applied }) {
   const active = applied.filter(({ active }) => !!active);
