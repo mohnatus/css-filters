@@ -1,13 +1,31 @@
 const info = {
-  opacity: 'Прозрачность',
-  grayscale: 'Оттенки серого',
-  sepia: 'Сепия',
-  blur: 'Размытие',
-  saturate: 'Насыщенность',
-  brightness: 'Яркость',
-  contrast: 'Контраст',
-  invert: 'Негатив',
-  'hue-rotate': 'Поворот по цветовому кругу',
+  opacity: {
+    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/opacity'
+  },
+  grayscale: {
+    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/grayscale'
+  },
+  sepia: {
+    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/sepia'
+  },
+  blur: {
+    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur'
+  },
+  saturate: {
+    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/saturate'
+  },
+  brightness: {
+    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness'
+  },
+  contrast: {
+    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/contrast'
+  },
+  invert: {
+    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert'
+  },
+  'hue-rotate': {
+    mdn: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/hue-rotate'
+  },
 };
 
 function createFilter(name, params = {}) {

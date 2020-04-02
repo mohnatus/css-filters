@@ -4,6 +4,7 @@ import { useTheme } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 import Popover from '@material-ui/core/Popover';
 import InfoIcon from '@material-ui/icons/Info';
 
@@ -59,7 +60,9 @@ function FiltersListButton({ filterName, disabled, onClick, view = 'block' }) {
         anchorOrigin={anchorOrigin}
         transformOrigin={transformOrigin}
       >
-        <Typography variant="body2" component="div" style={{ padding: theme.spacing(2) }}>{info}</Typography>
+        <Typography variant="body2" component="div" style={{ padding: theme.spacing(2) }}>
+          <Link href={info.mdn}>MDN docs</Link>
+        </Typography>
       </Popover>
     </>
   );
