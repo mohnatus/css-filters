@@ -66,15 +66,18 @@ function Playground({
           </Grid>
 
           <Hidden smDown>
-            <Grid item md={3}>
+            <Grid item xs={12} md={3}>
               <FiltersList
                 applied={applied}
                 onApply={applyFilter}
                 view='block'
               />
             </Grid>
-            <Google />
           </Hidden>
+
+          <Grid item xs={12}>
+            <Google />
+          </Grid>
         </Grid>
       </div>
     </Container>
