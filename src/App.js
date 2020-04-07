@@ -9,6 +9,8 @@ import Header from './components/Header';
 import Playground from './containers/Playground';
 
 import { filters } from './data/filters';
+import { Container } from '@material-ui/core';
+import AdSense from 'react-adsense-ad';
 
 const theme = createMuiTheme({
   palette: {
@@ -25,6 +27,17 @@ function App() {
         <Header />
 
         <Playground filters={filters} />
+        <Container maxWidth='lg'>
+          <div style={{ overflow: 'hidden' }}>
+            <AdSense.Google
+              client='ca-pub-3389773486006292'
+              slot='3538683662'
+              style={{ display: 'block' }}
+              format='auto'
+              responsive='true'
+            />
+          </div>
+        </Container>
       </div>
     </ThemeProvider>
   );

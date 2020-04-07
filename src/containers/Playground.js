@@ -16,7 +16,6 @@ import {
   activateFilter,
   sortFilters,
 } from '../redux/actions/filtersActions';
-import Google from '../components/Google';
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -74,10 +73,6 @@ function Playground({
               />
             </Grid>
           </Hidden>
-
-          <Grid item xs={12}>
-            <Google />
-          </Grid>
         </Grid>
       </div>
     </Container>
