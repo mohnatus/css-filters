@@ -29,7 +29,7 @@ function Applied({ list, onSort, ...callbacks }) {
     >
       {list.map(({ name, value, active }) => {
         return (
-          <Grid item key={name} xs={12} sm={6} md={4}>
+          <Grid item key={name} xs={12} sm={6} lg={4}>
             <Filter
               value={value}
               filterName={name}

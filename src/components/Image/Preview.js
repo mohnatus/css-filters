@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -30,9 +30,9 @@ Preview.propTypes = {
 function Preview({ url, size = 70, selected, onClick }) {
   const classes = useStyles();
 
-  function clickHandler() {
+  const clickHandler = useCallback(() => {
     onClick(url);
-  }
+  }, [onClick, url])
 
   return (
     <div onClick={clickHandler} className={classes.preview}>

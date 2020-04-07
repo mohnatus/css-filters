@@ -19,10 +19,6 @@ function Select({ current, custom, onChange, onLoad }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  function toggleHadler() {
-    setOpen(!open);
-  }
-
   function loadHandler(file) {
     setLoading(true);
     getDataUrl(file).then((url) => {
@@ -38,7 +34,7 @@ function Select({ current, custom, onChange, onLoad }) {
           variant='contained'
           color='secondary'
           fullWidth
-          onClick={toggleHadler}
+          onClick={() => setOpen(!open)}
         >
           {open ? 'Hide' : 'Change image'}
         </Button>

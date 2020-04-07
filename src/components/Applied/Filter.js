@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
+import Paper from '@material-ui/core/Paper';
+import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Close';
-import DragHandle from '@material-ui/icons/DragHandle';
+import Zero from '@material-ui/icons/ExposureZero';
+import DragIndicator from '@material-ui/icons/DragIndicator';
+import PowerSettings from '@material-ui/icons/PowerSettingsNew';
 import Code from '../UI/Code';
-import RoundSlider from '../UI/RoundSlider';
 import { filters } from '../../data/filters';
+import { useCallback } from 'react';
 
-const useStyles = makeStyles(({ palette }) => ({
+const useStyles = makeStyles(({ palette, spacing }) => ({
   handle: {
-    height: 30,
+    width: 30,
+    flexShrink: 0,
     backgroundColor: palette.primary.main,
     color: palette.primary.contrastText,
     display: 'flex',
@@ -24,9 +24,38 @@ const useStyles = makeStyles(({ palette }) => ({
     justifyContent: 'center',
     cursor: 'grab',
     '&:hover': {
-      backgroundColor: palette.primary.dark
-    }
+      backgroundColor: palette.primary.dark,
+    },
   },
+  root: {
+    display: 'flex',
+    borderRadius: 'inherit',
+    overflow: 'hidden',
+  },
+  content: ({ active }) => ({
+    padding: spacing(2),
+    paddingRight: 0,
+    flexGrow: 1,
+    opacity: active ? 1 : 0.6,
+  }),
+  actions: {
+    flexShrink: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  slider: {
+    marginTop: spacing(2),
+  },
+  activate: ({ active }) => ({
+    color: active ? palette.primary.main : palette.text.disabled,
+  }),
+  reset: ({ value, filter }) => ({
+    color:
+      value === filter.defaultValue
+        ? palette.primary.main
+        : palette.text.disabled,
+  }),
 }));
 
 Filter.propTypes = {
@@ -36,8 +65,7 @@ Filter.propTypes = {
 
   onChange: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
-  onActivate: PropTypes.func.isRequired,
-  onDeactivate: PropTypes.func.isRequired,
+  onToggleActivate: PropTypes.func.isRequired,
 };
 
 function Filter({
@@ -46,40 +74,10 @@ function Filter({
   value,
   onChange,
   onRemove,
-  onActivate,
-  onDeactivate,
+  onToggleActivate,
 }) {
-  const classes = useStyles();
-  const activeStyle = {
-    opacity: active ? 1 : 0.5,
-  };
-
   const filter = filters[filterName];
-
-  function changeHandler(newValue) {
-    onChange(filterName, newValue);
-  }
-  function linearSliderChangeHandler(event, newValue) {
-    changeHandler(newValue);
-  }
-  function resetHandler() {
-    onChange(filterName, filter.defaultValue);
-  }
-  function removeHandler() {
-    onRemove(filterName);
-  }
-  function deactivateHandler() {
-    onDeactivate(filterName);
-  }
-  function activateHandler() {
-    onActivate(filterName);
-  }
-
-  const RemoveButton = (
-    <IconButton aria-label='remove' onClick={removeHandler} color='primary'>
-      <RemoveIcon />
-    </IconButton>
-  );
+  const classes = useStyles({ active, value, filter });
 
   const sliderParams = {
     value: value,
@@ -88,47 +86,67 @@ function Filter({
     step: filter.step,
   };
 
+  const removeHandler = useCallback(() => {
+    onRemove(filterName)
+  }, [filterName, onRemove]);
+
+  const toggleActivateHandler = useCallback(() => {
+    onToggleActivate(filterName)
+  }, [filterName, onToggleActivate]);
+
+  const changeHandler = useCallback((event, value) => {
+    onChange(filterName, value);
+  }, [filterName, onChange]);
+
+  const resetHandler = useCallback(() => {
+    onChange(filterName, filter.defaultValue);
+  }, [filterName, onChange, filter]);
+
   return (
-    <Card>
-      <div className={`${classes.handle} dnd-handle`}>
-        <DragHandle />
+    <Paper>
+      <div className={classes.root}>
+        <div className={`${classes.handle} dnd-handle`}>
+          <DragIndicator />
+        </div>
+        <div className={classes.content}>
+          <Code>filter: {filter.css(value)};</Code>
+          <Slider
+            className={classes.slider}
+            {...sliderParams}
+            onChange={changeHandler}
+          />
+        </div>
+        <div className={classes.actions}>
+          <Tooltip title='Remove'>
+            <IconButton
+              aria-label='remove'
+              onClick={removeHandler}
+              color='primary'
+            >
+              <RemoveIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={active ? 'Deactivate' : 'Activate'}>
+            <IconButton
+              className={classes.activate}
+              aria-label={active ? 'deactivate' : 'activate'}
+              onClick={toggleActivateHandler}
+            >
+              <PowerSettings />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title='Reset'>
+            <IconButton
+              className={classes.reset}
+              aria-label='reset'
+              onClick={resetHandler}
+            >
+              <Zero />
+            </IconButton>
+          </Tooltip>
+        </div>
       </div>
-      <CardHeader
-        style={activeStyle}
-        action={RemoveButton}
-        subheader={filter.name}
-        title={`${value}${filter.unit}`}
-      />
-      <CardContent style={activeStyle}>
-        {filter.shape === 'circular' ? (
-          <RoundSlider {...sliderParams} onChange={changeHandler} />
-        ) : (
-          <Slider {...sliderParams} onChange={linearSliderChangeHandler} />
-        )}
-
-        <Code>filter: {filter.css(value)};</Code>
-      </CardContent>
-      <CardActions>
-        <Button
-          color={value === filter.defaultValue ? 'secondary' : 'default'}
-          fullWidth
-          aria-label='reset'
-          onClick={resetHandler}
-        >
-          RESET
-        </Button>
-
-        {active ? (
-          <Button fullWidth onClick={deactivateHandler}>
-            DEACTIVATE
-          </Button>
-        ) : (
-          <Button color='secondary' fullWidth onClick={activateHandler}>
-            ACTIVATE
-          </Button>
-        )}
-      </CardActions>
-    </Card>
+    </Paper>
   );
 }
 

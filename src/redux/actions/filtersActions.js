@@ -1,8 +1,7 @@
 export const APPLY_FILTER = 'apply.filter';
 export const CHANGE_FILTER_VALUE = 'change.filter.value';
 export const REMOVE_FILTER = 'remove.filter';
-export const DEACTIVATE_FILTER = 'deactivate.filter';
-export const ACTIVATE_FILTER = 'activate.filter';
+export const TOGGLE_ACTIVATE_FILTER = 'toggle.activate.filter';
 export const SORT_FILTERS = 'sort.filters';
 
 export function applyFilter(filterName) {
@@ -29,16 +28,9 @@ export function removeFilter(filterName) {
   };
 }
 
-export function deactivateFilter(filterName) {
+export function toggleActivateFilter(filterName) {
   return {
-    type: DEACTIVATE_FILTER,
-    payload: filterName,
-  };
-}
-
-export function activateFilter(filterName) {
-  return {
-    type: ACTIVATE_FILTER,
+    type: TOGGLE_ACTIVATE_FILTER,
     payload: filterName,
   };
 }

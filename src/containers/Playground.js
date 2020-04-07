@@ -12,8 +12,7 @@ import {
   changeFilterValue,
   applyFilter,
   removeFilter,
-  deactivateFilter,
-  activateFilter,
+  toggleActivateFilter,
   sortFilters,
 } from '../redux/actions/filtersActions';
 
@@ -29,8 +28,7 @@ function Playground({
   changeFilterValue,
   applyFilter,
   removeFilter,
-  activateFilter,
-  deactivateFilter,
+  toggleActivateFilter,
   sortFilters,
 }) {
   const classes = useStyles();
@@ -56,8 +54,7 @@ function Playground({
               list={applied}
               onChange={changeFilterValue}
               onRemove={removeFilter}
-              onActivate={activateFilter}
-              onDeactivate={deactivateFilter}
+              onToggleActivate={toggleActivateFilter}
               onSort={sortFilters}
             />
 
@@ -96,11 +93,8 @@ const mapDispatchToProps = (dispatch) => {
     removeFilter: (filterName) => {
       dispatch(removeFilter(filterName));
     },
-    deactivateFilter: (filterName) => {
-      dispatch(deactivateFilter(filterName));
-    },
-    activateFilter: (filterName) => {
-      dispatch(activateFilter(filterName));
+    toggleActivateFilter: (filterName) => {
+      dispatch(toggleActivateFilter(filterName));
     },
     sortFilters: (filters) => {
       dispatch(sortFilters(filters));

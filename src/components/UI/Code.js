@@ -1,22 +1,34 @@
 import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import copy from 'copy-to-clipboard';
+import CopyIcon from '@material-ui/icons/FileCopy';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   root: {
     background: palette.grey[100],
-    padding: spacing(2),
+    padding: spacing(1),
+    paddingLeft: spacing(2),
     position: 'relative',
-    marginTop: spacing(2),
   },
   button: {
     position: 'absolute',
-    top: 0,
-    right: 0,
+    top: '-1.2em',
+    left: '-1em',
+    padding: spacing(1),
+    minWidth: 0,
+    color: palette.text.disabled,
+    '&:hover, &:active, &:focus': {
+      color: palette.primary.main
+    }
   },
+  code: {
+    whiteSpace: 'normal'
+  }
 }));
 
 Code.propTypes = {
@@ -33,39 +45,35 @@ function Code({ children }) {
     const result = copy(text);
     if (result) {
       setFeedback({
-        text: 'COPIED',
+        text: 'CODE IS COPIED TO CLIPBOARD',
         error: false,
       });
     } else {
       setFeedback({
-        text: 'ERROR',
+        text: 'FAILED TO COPY',
         error: true,
       });
     }
   }
 
-  function hideFeedback() {
-    setFeedback(null);
-  }
-
   return (
-    <div className={classes.root} >
-      <pre ref={codeRef}>{children}</pre>
-
-      <Button
-        onClick={copyHandler}
-        className={classes.button}
-        color='primary'
-        size='small'
-      >
-        Copy
-      </Button>
+    <div className={classes.root}>
+      <pre ref={codeRef} className={classes.code}>{children}</pre>
+      <Tooltip title='Copy'>
+        <IconButton
+          onClick={copyHandler}
+          className={classes.button}
+          size='small'
+        >
+          <CopyIcon fontSize="small" color='inherit' />
+        </IconButton>
+      </Tooltip>
 
       {feedback ? (
         <Snackbar
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
           open
-          onClose={hideFeedback}
+          onClose={() => setFeedback(null)}
           message={feedback.text}
         />
       ) : null}

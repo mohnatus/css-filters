@@ -2,8 +2,7 @@ import {
   APPLY_FILTER,
   CHANGE_FILTER_VALUE,
   REMOVE_FILTER,
-  DEACTIVATE_FILTER,
-  ACTIVATE_FILTER,
+  TOGGLE_ACTIVATE_FILTER,
   SORT_FILTERS,
 } from '../actions/filtersActions';
 import { filters } from '../../data/filters';
@@ -52,23 +51,12 @@ export function filtersReducer(state = initialState, action) {
         return filter.name !== action.payload;
       });
 
-    case DEACTIVATE_FILTER:
+    case TOGGLE_ACTIVATE_FILTER:
       return state.map((filter) => {
         if (filter.name === action.payload) {
           return {
             ...filter,
-            active: false,
-          };
-        }
-        return filter;
-      });
-
-    case ACTIVATE_FILTER:
-      return state.map((filter) => {
-        if (filter.name === action.payload) {
-          return {
-            ...filter,
-            active: true,
+            active: !filter.active,
           };
         }
         return filter;

@@ -56,7 +56,6 @@ export const filters = {
   hueRotate: createFilter('hue-rotate', {
     max: 360,
     unit: 'deg',
-    shape: 'circular',
   }),
   invert: createFilter('invert'),
   opacity: createFilter('opacity', { defaultValue: 100 }),
