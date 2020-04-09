@@ -2,6 +2,9 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,7 +14,6 @@ import UpIcon from '@material-ui/icons/ArrowDropUp';
 import DragIndicator from '@material-ui/icons/DragIndicator';
 import Code from '../UI/Code';
 import { isDefaultValue, filters, filterCSS } from '../../data/filters';
-import { Typography, Button, Link } from '@material-ui/core';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   handle: {
@@ -60,7 +62,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   },
   slider: {
     marginTop: spacing(2),
-  }
+  },
 }));
 
 Filters.propTypes = {
@@ -96,6 +98,8 @@ function Filters({ filterName, filterValue, onChange }) {
         aria-label='MDN reference'
         color='primary'
         href={mdn}
+        target='_blank'
+        rel='noopener noreferrer nofollow'
         component={Link}
       >
         <InfoIcon />
@@ -133,7 +137,7 @@ function Filters({ filterName, filterValue, onChange }) {
                   <UpIcon />
                 </IconButton>
               </Tooltip>
-              { MdnReference }
+              {MdnReference}
               {isActive ? (
                 <Tooltip title='Reset'>
                   <IconButton
@@ -161,7 +165,7 @@ function Filters({ filterName, filterValue, onChange }) {
                 {unit}
               </Typography>
             </Button>
-            { MdnReference }
+            {MdnReference}
           </div>
         )}
       </div>
