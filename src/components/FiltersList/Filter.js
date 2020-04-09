@@ -96,7 +96,6 @@ function Filters({ filterName, filterValue, onChange }) {
         aria-label='MDN reference'
         color='primary'
         href={mdn}
-        color='primary'
         component={Link}
       >
         <InfoIcon />
