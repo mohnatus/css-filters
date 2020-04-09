@@ -1,31 +1,13 @@
-const info = {
-  opacity: {
-    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/opacity'
-  },
-  grayscale: {
-    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/grayscale'
-  },
-  sepia: {
-    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/sepia'
-  },
-  blur: {
-    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur'
-  },
-  saturate: {
-    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/saturate'
-  },
-  brightness: {
-    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness'
-  },
-  contrast: {
-    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/contrast'
-  },
-  invert: {
-    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert'
-  },
-  'hue-rotate': {
-    link: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/hue-rotate'
-  },
+const mdn = {
+  opacity: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/opacity',
+  grayscale: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/grayscale',
+  sepia: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/sepia',
+  blur: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur',
+  saturate: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/saturate',
+  brightness: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/brightness',
+  contrast: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/contrast',
+  invert: 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/invert',
+  'hue-rotate': 'https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/hue-rotate',
 };
 
 function createFilter(name, params = {}) {
@@ -36,17 +18,14 @@ function createFilter(name, params = {}) {
     max: 100,
     unit: '%',
     step: 1,
-    shape: 'linear',
-    info: info[name],
-    css(value) {
-      return `${this.name}(${value}${this.unit})`;
-    },
+    mdn: mdn[name],
     ...params,
   };
   return filter;
 }
 
 export const filters = {
+  invert: createFilter('invert'),
   grayscale: createFilter('grayscale'),
   sepia: createFilter('sepia'),
   blur: createFilter('blur', { max: 10, step: 0.5, unit: 'px' }),
@@ -57,6 +36,14 @@ export const filters = {
     max: 360,
     unit: 'deg',
   }),
-  invert: createFilter('invert'),
   opacity: createFilter('opacity', { defaultValue: 100 }),
 };
+
+export function filterCSS(filterName, filterValue) {
+  const filter = filters[filterName]
+  return `${filter.name}(${filterValue}${filter.unit})`
+}
+
+export function isDefaultValue(filterName, filterValue) {
+  return filters[filterName].defaultValue === filterValue;
+}

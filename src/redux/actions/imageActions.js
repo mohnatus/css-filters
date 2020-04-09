@@ -1,16 +1,15 @@
-export const CHANGE_IMAGE = 'change.image';
-export const LOAD_IMAGE = 'load.image';
+import * as types from './imageActionsTypes';
 
 export function changeImage(url) {
   return {
-    type: CHANGE_IMAGE,
+    type: types.CHANGE_IMAGE,
     payload: url,
   };
 }
 
 export function loadImage(url) {
   return {
-    type: LOAD_IMAGE,
+    type: types.LOAD_IMAGE,
     payload: url,
   };
 }

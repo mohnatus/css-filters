@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeImage, loadImage } from '../redux/actions/imageActions';
+import * as actions from '../redux/actions/imageActions';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Images from '../components/Image/Images';
@@ -12,14 +12,14 @@ const useStyles = makeStyles(({spacing}) => ({
   }
 }))
 
-function Image({ applied, current, custom, changeImage, loadImage }) {
+function Image({ css, current, custom, changeImage, loadImage }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
     <Grid container spacing={1}>
       <Grid item xs={12}>
-        <Images url={current} applied={applied} />
+        <Images url={current} css={css} />
       </Grid>
       <Grid item xs={12}>
         <Select
@@ -43,10 +43,10 @@ const mapStateToProps = ({ image }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeImage: (url) => {
-      dispatch(changeImage(url));
+      dispatch(actions.changeImage(url));
     },
     loadImage: (url) => {
-      dispatch(loadImage(url));
+      dispatch(actions.loadImage(url));
     },
   };
 };

@@ -1,27 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import { filters } from '../../data/filters';
 
 Images.propTypes = {
-  applied: PropTypes.arrayOf(
-    PropTypes.shape({
-      active: PropTypes.bool,
-      name: PropTypes.string,
-      value: PropTypes.number,
-    }),
-  ),
+  css: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
-function Images({ applied, url }) {
-  const filterCSS = applied
-    .filter(({ active }) => active)
-    .map(({ name, value }) => {
-      const filter = filters[name];
-      return filter.css(value);
-    })
-    .join(' ');
-
+function Images({ css, url }) {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6}>
@@ -33,7 +19,7 @@ function Images({ applied, url }) {
         <img
           src={url}
           alt='Image with applied filters'
-          style={{ filter: filterCSS }}
+          style={{ filter: css }}
         />
       </Grid>
     </Grid>

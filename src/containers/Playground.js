@@ -3,18 +3,11 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
 import Image from './Image';
-import Applied from '../components/Applied/Applied';
 import FiltersList from '../components/FiltersList';
-import ResultCode from '../components/ResultCode';
-import {
-  changeFilterValue,
-  applyFilter,
-  removeFilter,
-  toggleActivateFilter,
-  sortFilters,
-} from '../redux/actions/filtersActions';
+import Code from '../components/UI/Code';
+import * as actions from '../redux/actions/filtersActions';
+import { isDefaultValue, filterCSS } from '../data/filters';
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -23,53 +16,31 @@ const useStyles = makeStyles(({ spacing }) => ({
   },
 }));
 
-function Playground({
-  applied,
-  changeFilterValue,
-  applyFilter,
-  removeFilter,
-  toggleActivateFilter,
-  sortFilters,
-}) {
+function Playground({ filters, changeFilterValue, sortFilters }) {
   const classes = useStyles();
+
+  const appliedFiltersCSSString = filters.order
+    .map((filterName) => {
+      const filterValue = filters.values[filterName];
+      if (isDefaultValue(filterName, filterValue)) return null;
+      return filterCSS(filterName, filterValue);
+    })
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <Container maxWidth='lg'>
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <Hidden mdUp>
-            <Grid item xs={12}>
-              <FiltersList
-                applied={applied}
-                onApply={applyFilter}
-                view='inline'
-              />
-            </Grid>
-          </Hidden>
-
-          <Grid item xs={12} md={9}>
-            <Image applied={applied} />
-
-            <Applied
-              list={applied}
-              onChange={changeFilterValue}
-              onRemove={removeFilter}
-              onToggleActivate={toggleActivateFilter}
-              onSort={sortFilters}
-            />
-
-            <ResultCode applied={applied} />
+          <Grid item xs={12}>
+            <Image css={appliedFiltersCSSString} />
           </Grid>
-
-          <Hidden smDown>
-            <Grid item xs={12} md={3}>
-              <FiltersList
-                applied={applied}
-                onApply={applyFilter}
-                view='block'
-              />
-            </Grid>
-          </Hidden>
+          <Grid item xs={12}>
+            <FiltersList {...filters} onChange={changeFilterValue} onSort={sortFilters} />
+          </Grid>
+          <Grid item xs={12}>
+            {appliedFiltersCSSString ? <Code>filter: {appliedFiltersCSSString}</Code> : null}
+          </Grid>
         </Grid>
       </div>
     </Container>
@@ -78,26 +49,17 @@ function Playground({
 
 const mapStateToProps = ({ filters }) => {
   return {
-    applied: filters,
+    filters,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     changeFilterValue: (filterName, newValue) => {
-      dispatch(changeFilterValue(filterName, newValue));
-    },
-    applyFilter: (filterName) => {
-      dispatch(applyFilter(filterName));
-    },
-    removeFilter: (filterName) => {
-      dispatch(removeFilter(filterName));
-    },
-    toggleActivateFilter: (filterName) => {
-      dispatch(toggleActivateFilter(filterName));
+      dispatch(actions.changeFilterValue(filterName, newValue));
     },
     sortFilters: (filters) => {
-      dispatch(sortFilters(filters));
+      dispatch(actions.sortFilters(filters));
     },
   };
 };

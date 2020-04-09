@@ -1,5 +1,5 @@
 import startImage from '../../images/3.jpg';
-import { CHANGE_IMAGE, LOAD_IMAGE } from '../actions/imageActions';
+import * as types from '../actions/imageActionsTypes';
 
 const initialState = {
   custom: null,
@@ -8,12 +8,12 @@ const initialState = {
 
 export function imageReducer(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_IMAGE:
+    case types.CHANGE_IMAGE:
       return {
         ...state,
         current: action.payload,
       };
-    case LOAD_IMAGE:
+    case types.LOAD_IMAGE:
       return {
         ...state,
         custom: action.payload,

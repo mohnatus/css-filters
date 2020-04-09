@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Code from './UI/Code';
-import { filters } from '../data/filters';
+import { filterCSS } from '../data/filters';
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -27,8 +27,7 @@ function ResultCode({ applied }) {
 
   const css = active
     .map(({ name, value }) => {
-      const filter = filters[name];
-      return filter.css(value);
+      return filterCSS(name, value);
     })
     .join(' ');
   return (

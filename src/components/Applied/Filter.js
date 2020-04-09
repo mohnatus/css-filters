@@ -10,7 +10,7 @@ import Zero from '@material-ui/icons/ExposureZero';
 import DragIndicator from '@material-ui/icons/DragIndicator';
 import PowerSettings from '@material-ui/icons/PowerSettingsNew';
 import Code from '../UI/Code';
-import { filters } from '../../data/filters';
+import { filters, filterCSS } from '../../data/filters';
 import { useCallback } from 'react';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
@@ -109,7 +109,7 @@ function Filter({
           <DragIndicator />
         </div>
         <div className={classes.content}>
-          <Code>filter: {filter.css(value)};</Code>
+          <Code>filter: {filterCSS(filterName, value)};</Code>
           <Slider
             className={classes.slider}
             {...sliderParams}
